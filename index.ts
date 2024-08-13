@@ -33,7 +33,7 @@ export interface GetValuesParams {
   rowIDsOnly?: boolean;
   textLength?: number;
 }
-type Value = number | string;
+export type Value = number | string;
 export interface Table {
   rowIDs: string[];
   table?: Value[][];
@@ -54,7 +54,7 @@ export type BasicStatAggregationType = 'NDEFINED' |
   'DIFF_VALUES' |
   'MODE' |
   'MODE_COUNT' |
-  'SUM' | 
+  'SUM' |
   'TIME_MIN' |
   'TIME_MAX';
 export interface BasicStatAggregation {
@@ -216,6 +216,7 @@ export interface IWidget {
   hasSelection?(): boolean;
   selectByDDExpression?(cond?: TConditionNode, isUserCond?: boolean): void;
   getFormHandler?(): IFormComponent;
+  updateApprSchema?(schema: ApprTab[]): Promise<ApprTab[]>
 }
 
 export interface WidgetArgs {
@@ -226,12 +227,13 @@ export interface WidgetArgs {
 }
 
 export type ApprValue = string | number;
-interface ApprCtrl {
+export interface ApprCtrl {
   apprKey: string;
   label: string;
   defaultValue?: ApprValue;
   type: string;
   props?: Record<string, any>;
+  hidden?: boolean | (() => boolean);
 }
 
 export interface ApprTab {
